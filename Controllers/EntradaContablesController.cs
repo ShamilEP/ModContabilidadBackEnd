@@ -27,7 +27,7 @@ namespace ModContabilidad.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EntradaContable>>> GetEntradaContable()
         {
-            return await _context.EntradaContable.ToListAsync();
+            return await _context.EntradaContable.Include(d => d.DetalleEntradaContable).ToListAsync();
         }
 
         // GET: api/EntradaContables/5
