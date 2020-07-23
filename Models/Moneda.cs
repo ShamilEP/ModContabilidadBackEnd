@@ -21,7 +21,7 @@ namespace ModContabilidad.Models
         [DisplayFormat(DataFormatString = "RD {0:C2}"), Range(0, 99.99, ErrorMessage = "Introduzca una tasa de cambio válida.")]
         public double Tasa { get; set; }
         
-        public bool Estado { get; set; }
+        public bool? Estado { get; set; }
 
         public virtual ICollection<EntradaContable> EntradaContable { get; set; }
     }
