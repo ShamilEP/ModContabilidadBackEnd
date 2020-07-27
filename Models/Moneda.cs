@@ -12,7 +12,12 @@ namespace ModContabilidad.Models
         }
 
         public int Id { get; set; }
-        
+
+        //codigo agregado by ignacio
+        [Required]
+        [StringLength(10, ErrorMessage = "Introduzca el codigo.", MinimumLength = 1)]
+        public string Codigo{ get; set; }
+
         [Required]
         [StringLength(130, ErrorMessage = "Introduzca la moneda.", MinimumLength = 2)]
         public string Descripcion { get; set; }

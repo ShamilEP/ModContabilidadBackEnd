@@ -80,8 +80,8 @@ namespace ModContabilidad.Controllers
         [HttpPost]
         public async Task<ActionResult<TipoCuenta>> PostTipoCuenta(TipoCuenta tipoCuenta)
         {
-            int maxId = await _context.TipoCuenta.MaxAsync(t => t.Id);
-            tipoCuenta.Id = maxId + 1;
+            //int maxId = await _context.TipoCuenta.MaxAsync(t => t.Id);
+            //tipoCuenta.Id = maxId + 1;
 
             _context.TipoCuenta.Add(tipoCuenta);
             await _context.SaveChangesAsync();

@@ -58,7 +58,10 @@ namespace ModContabilidad.Models
                 entity.HasIndex(e => e.TipoCuentaId)
                     .HasName("cuenta_contable_tipo_cuenta_id_fk");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                //id a mano by ignacio
+                entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired();
 
                 entity.Property(e => e.Balance).HasColumnName("balance");
 
@@ -154,12 +157,24 @@ namespace ModContabilidad.Models
                     .HasMaxLength(130)
                     .IsUnicode(false);
 
+                //fecha by ignacio
+                entity.Property(e => e.Fecha)
+                    .IsRequired()
+                    .HasColumnName("fecha");
+
+                //monto by ignacio
+                entity.Property(e => e.Monto)
+                    .IsRequired()
+                    .HasColumnName("monto");
+
                 entity.Property(e => e.Estado)
                     .HasColumnName("estado")
                     .HasColumnType("bit(1)")
                     .HasDefaultValueSql("b'1'");
 
-                entity.Property(e => e.MonedaId).HasColumnName("moneda_id");
+                //moneda automatica by ignacio
+                entity.Property(e => e.MonedaId)
+                .HasColumnName("moneda_id");
 
                 entity.HasOne(d => d.Auxiliar)
                     .WithMany(p => p.EntradaContable)
@@ -186,6 +201,13 @@ namespace ModContabilidad.Models
                     .HasMaxLength(130)
                     .IsUnicode(false);
 
+                //codigo agregado by ignacio
+                entity.Property(e => e.Codigo)
+                    .IsRequired()
+                    .HasColumnName("codigo")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Estado)
                     .HasColumnName("estado")
                     .HasColumnType("bit(1)")
@@ -198,7 +220,10 @@ namespace ModContabilidad.Models
             {
                 entity.ToTable("tipo_cuenta");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                //id a mano by ignacio
+                entity.Property(e => e.Id)
+                .HasColumnName("id")
+                .IsRequired();
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()

@@ -80,6 +80,18 @@ namespace ModContabilidad.Controllers
         [HttpPost]
         public async Task<ActionResult<EntradaContable>> PostEntradaContable(EntradaContable entradaContable)
         {
+            //fecha automatica by ignacio
+            entradaContable.Fecha = DateTime.Now;
+
+            //moneda automatica
+            entradaContable.MonedaId = (entradaContable.MonedaId > 0) ? entradaContable.MonedaId : 1;
+            var moneda = await _context.Moneda.FindAsync(entradaContable.MonedaId);
+
+            //monto automatica by ignacio
+            entradaContable.Monto = (entradaContable.Monto > 0) ? 
+                entradaContable.Monto : 
+                entradaContable.DetalleEntradaContable.Select(d => d.Monto).Sum() * moneda.Tasa;
+
             _context.EntradaContable.Add(entradaContable);
             await _context.SaveChangesAsync();
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModContabilidad.Models
 {
@@ -11,6 +12,8 @@ namespace ModContabilidad.Models
             DetalleEntradaContable = new List<DetalleEntradaContable>();
         }
 
+        //id a mano by ignacio
+        [Required]
         public int Id { get; set; }
 
         [Required]

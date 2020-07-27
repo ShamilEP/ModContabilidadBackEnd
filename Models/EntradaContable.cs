@@ -18,12 +18,20 @@ namespace ModContabilidad.Models
         [StringLength(130, ErrorMessage = "Introduzca una descripción válida.", MinimumLength = 5)]
         public string Descripcion { get; set; }
 
+        //fecha by ignacio
+        [Required]
+        public DateTime Fecha { get; set; }
+
+        //monto by ignacio
+        [Required]
+        public double Monto { get; set; }
+
         [Required]
         [Range(1, 9, ErrorMessage = "Introduzca un auxiliar válido.")]
         public int AuxiliarId { get; set; }
 
         [Required]
-        [Range(1, 244, ErrorMessage = "Introduzca una moneda válida.")]
+        [Range(0, 244, ErrorMessage = "Introduzca una moneda válida.")]
         public int MonedaId { get; set; }
 
         public bool Estado { get; set; }
