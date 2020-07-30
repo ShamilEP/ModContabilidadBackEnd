@@ -76,6 +76,12 @@ namespace ModContabilidad.Controllers
         }
 
         // POST: api/EntradaContables
+        /// <summary>
+        /// Método para registrar una entrada contable con sus detalles.
+        /// Para el correcto funcionamietno de este método es necesario enviar un objeto EntradaContable con por lo menos dos detalle, uno en crédito y otro en débito.
+        /// </summary>
+        /// <param name="entradaContable"></param>
+        /// <returns>Retorna el objeto EntradaContable con su Id generado en base de datos.</returns>
         [ValidateModel]
         [HttpPost]
         public async Task<ActionResult<EntradaContable>> PostEntradaContable(EntradaContable entradaContable)
@@ -87,15 +93,61 @@ namespace ModContabilidad.Controllers
             entradaContable.MonedaId = (entradaContable.MonedaId > 0) ? entradaContable.MonedaId : 1;
             var moneda = await _context.Moneda.FindAsync(entradaContable.MonedaId);
 
+            if (!ValidCreditsAndDebitsAmounts(entradaContable))
+            {
+                return BadRequest("Esta entrada contable está descuadrada.");
+            }
+
+            if (!ValidMoveTypes(entradaContable))
+            {
+                return BadRequest("Esta entrada contable le hace falta un débito o crédito.");
+            }
+
             //monto automatica by ignacio
             entradaContable.Monto = (entradaContable.Monto > 0) ? 
                 entradaContable.Monto : 
-                entradaContable.DetalleEntradaContable.Select(d => d.Monto).Sum() * moneda.Tasa;
+                entradaContable.DetalleEntradaContable.Sum(d => d.Monto) * moneda.Tasa;
 
             _context.EntradaContable.Add(entradaContable);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEntradaContable", new { id = entradaContable.Id }, entradaContable);
+        }
+
+        private bool ValidCreditsAndDebitsAmounts(EntradaContable entrada)
+        {
+            if (entrada != null && entrada.DetalleEntradaContable?.Count > 0)
+            {
+                double? montosDbs = entrada.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "DB")?.Sum(d => d.Monto);
+                double? montosCds = entrada.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "CR")?.Sum(d => d.Monto);
+
+                if (montosCds < montosDbs)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ValidMoveTypes(EntradaContable entradaContable)
+        {
+            if (entradaContable != null && entradaContable.DetalleEntradaContable?.Count > 0)
+            {
+                int? cantidadDbs = entradaContable.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "DB")?.Count();
+                int? cantidadCds = entradaContable.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "CD")?.Count();
+
+                if ((cantidadDbs != null && cantidadDbs >= 1) && (cantidadCds != null && cantidadCds >= 1))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return false;
         }
 
         // DELETE: api/EntradaContables/5

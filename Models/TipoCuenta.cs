@@ -10,7 +10,6 @@ namespace ModContabilidad.Models
             CuentaContable = new List<CuentaContable>();
         }
 
-        [Required]
         public int Id { get; set; }
 
         [Required]

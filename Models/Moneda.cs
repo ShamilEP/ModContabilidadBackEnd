@@ -15,7 +15,7 @@ namespace ModContabilidad.Models
 
         //codigo agregado by ignacio
         [Required]
-        [StringLength(10, ErrorMessage = "Introduzca el codigo.", MinimumLength = 1)]
+        [StringLength(3, ErrorMessage = "Introduzca el código ISO.", MinimumLength = 3)]
         public string Codigo{ get; set; }
 
         [Required]
