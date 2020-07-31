@@ -137,7 +137,7 @@ namespace ModContabilidad.Controllers
             if (entradaContable != null && entradaContable.DetalleEntradaContable?.Count > 0)
             {
                 int? cantidadDbs = entradaContable.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "DB")?.Count();
-                int? cantidadCds = entradaContable.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "CD")?.Count();
+                int? cantidadCds = entradaContable.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "CR")?.Count();
 
                 if ((cantidadDbs != null && cantidadDbs >= 1) && (cantidadCds != null && cantidadCds >= 1))
                 {

@@ -16,6 +16,10 @@ namespace ModContabilidad.Models
         [Required]
         [StringLength(2, ErrorMessage = "Introduzca un tipo de movimiento válido.", MinimumLength = 2)]
         public string TipoMovimiento { get; set; }
+        //descripcion de detalle agregada by ignacio
+        [Required]
+        [StringLength(130, ErrorMessage = "Descripcion invalida.", MinimumLength = 1)]
+        public string Descripcion { get; set; }
 
         [Required]
         [Range(1, double.MaxValue, ErrorMessage = "Introduzca un monto válido.")]

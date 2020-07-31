@@ -123,6 +123,12 @@ namespace ModContabilidad.Models
                     .HasMaxLength(2)
                     .IsUnicode(false)
                     .HasComment("DB, CR");
+                //descripcion de detalle agregada by ignacio
+                entity.Property(e => e.Descripcion)
+                  .IsRequired()
+                  .HasColumnName("descripcion")
+                  .HasMaxLength(130)
+                  .IsUnicode(false);
 
                 entity.HasOne(d => d.CuentaContable)
                     .WithMany(p => p.DetalleEntradaContable)
