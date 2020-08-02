@@ -11,7 +11,7 @@ using ModContabilidad.Models;
 
 namespace ModContabilidad.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CuentaContablesController : ControllerBase

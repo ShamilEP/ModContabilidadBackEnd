@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ModContabilidad.Filters;
@@ -11,7 +10,7 @@ using ModContabilidad.Models;
 
 namespace ModContabilidad.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EntradaContablesController : ControllerBase
@@ -45,6 +44,7 @@ namespace ModContabilidad.Controllers
         }
 
         // PUT: api/EntradaContables/5
+        [AllowAnonymous]
         [ValidateModel]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEntradaContable(int id, EntradaContable entradaContable)
@@ -82,6 +82,7 @@ namespace ModContabilidad.Controllers
         /// </summary>
         /// <param name="entradaContable"></param>
         /// <returns>Retorna el objeto EntradaContable con su Id generado en base de datos.</returns>
+        [AllowAnonymous]
         [ValidateModel]
         [HttpPost]
         public async Task<ActionResult<EntradaContable>> PostEntradaContable(EntradaContable entradaContable)

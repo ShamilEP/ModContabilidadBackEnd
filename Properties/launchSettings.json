@@ -20,7 +20,7 @@
     "ModContabilidad": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/users",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
