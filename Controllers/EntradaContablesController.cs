@@ -29,6 +29,29 @@ namespace ModContabilidad.Controllers
             return await _context.EntradaContable.Include(d => d.DetalleEntradaContable).ToListAsync();
         }
 
+        [AllowAnonymous]
+        [HttpGet("dummy")]
+        public ActionResult<EntradaContable> GetDummyEntradaContable()
+        {
+            var obj = new EntradaContable
+            {
+                Id = 0,
+                AuxiliarId = 0,
+                Descripcion = "Entrada Contable para Junio 2020",
+                Estado = true,
+                Fecha = new DateTime(1, 1, 1),
+                MonedaId = 0,
+                Monto = 10000.00,
+                DetalleEntradaContable = new List<DetalleEntradaContable>
+                {
+                    new DetalleEntradaContable { Id = 0, CuentaContableId = 0, Descripcion = "Breve descripción del detalle 1.", EntradaContableId = 0, TipoMovimiento = "CD", Monto = 5000.00, Estado = true },
+                    new DetalleEntradaContable { Id = 0, CuentaContableId = 0, Descripcion = "Breve descripción del detalle 2.", EntradaContableId = 0, TipoMovimiento = "DB", Monto = 5000.00, Estado = true }
+                }
+            };
+
+            return obj;
+        }
+
         // GET: api/EntradaContables/5
         [HttpGet("{id}")]
         public async Task<ActionResult<EntradaContable>> GetEntradaContable(int id)
