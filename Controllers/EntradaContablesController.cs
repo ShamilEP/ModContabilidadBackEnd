@@ -44,7 +44,7 @@ namespace ModContabilidad.Controllers
                 Monto = 10000.00,
                 DetalleEntradaContable = new List<DetalleEntradaContable>
                 {
-                    new DetalleEntradaContable { Id = 0, CuentaContableId = 0, Descripcion = "Breve descripción del detalle 1.", EntradaContableId = 0, TipoMovimiento = "CD", Monto = 5000.00, Estado = true },
+                    new DetalleEntradaContable { Id = 0, CuentaContableId = 0, Descripcion = "Breve descripción del detalle 1.", EntradaContableId = 0, TipoMovimiento = "CR", Monto = 5000.00, Estado = true },
                     new DetalleEntradaContable { Id = 0, CuentaContableId = 0, Descripcion = "Breve descripción del detalle 2.", EntradaContableId = 0, TipoMovimiento = "DB", Monto = 5000.00, Estado = true }
                 }
             };
@@ -143,9 +143,9 @@ namespace ModContabilidad.Controllers
             if (entrada != null && entrada.DetalleEntradaContable?.Count > 0)
             {
                 double? montosDbs = entrada.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "DB")?.Sum(d => d.Monto);
-                double? montosCds = entrada.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "CR")?.Sum(d => d.Monto);
+                double? montosCrs = entrada.DetalleEntradaContable?.Where(d => d.TipoMovimiento == "CR")?.Sum(d => d.Monto);
 
-                if (montosCds < montosDbs)
+                if (montosCrs < montosDbs)
                 {
                     return false;
                 }
