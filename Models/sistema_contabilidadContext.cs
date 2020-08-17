@@ -27,7 +27,7 @@ namespace ModContabilidad.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=ShespaDev07*;database=sistema_contabilidad");
+                optionsBuilder.UseMySQL("server=server;port=3306;user=user;password=pass;database=db");
             }
         }
 

@@ -36,10 +36,6 @@ namespace ModContabilidad.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(User user)
         {
-            //validate request
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             user.Username = user.Username.ToLower();
 
             if (await _userService.UserExists(user.Username))
@@ -72,7 +68,7 @@ namespace ModContabilidad.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.Now.AddDays(99),
                 SigningCredentials = creds
             };
 
