@@ -10,6 +10,7 @@ namespace ModContabilidad.Models
         public EntradaContable()
         {
             DetalleEntradaContable = new List<DetalleEntradaContable>();
+            Estado = true;
         }
 
         public int Id { get; set; }

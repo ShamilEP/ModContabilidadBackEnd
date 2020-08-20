@@ -31,21 +31,31 @@ namespace ModContabilidad.Controllers
 
         [AllowAnonymous]
         [HttpGet("dummy")]
-        public ActionResult<EntradaContable> GetDummyEntradaContable()
+        public ActionResult<object> GetDummyEntradaContable()
         {
-            var obj = new EntradaContable
+            //var obj = new ModContabilidad.Dtos.EntradaContable
+            //{
+            //    AuxiliarId = 0,
+            //    Descripcion = "Entrada Contable para Junio 2020",
+            //    MonedaId = 0,
+            //    Monto = 10000.00,
+            //    DetalleEntradaContable = new List<ModContabilidad.Dtos.DetalleEntradaContable>
+            //    {
+            //        new ModContabilidad.Dtos.DetalleEntradaContable { CuentaContableId = 0, Descripcion = "Breve descripción del detalle 1.", TipoMovimiento = "CR", Monto = 5000.00 },
+            //        new ModContabilidad.Dtos.DetalleEntradaContable { CuentaContableId = 0, Descripcion = "Breve descripción del detalle 2.", TipoMovimiento = "DB", Monto = 5000.00 }
+            //    }
+            //};
+
+            var obj = new
             {
-                Id = 0,
                 AuxiliarId = 0,
                 Descripcion = "Entrada Contable para Junio 2020",
-                Estado = true,
-                Fecha = new DateTime(1, 1, 1),
                 MonedaId = 0,
                 Monto = 10000.00,
-                DetalleEntradaContable = new List<DetalleEntradaContable>
+                DetalleEntradaContable = new List<object>
                 {
-                    new DetalleEntradaContable { Id = 0, CuentaContableId = 0, Descripcion = "Breve descripción del detalle 1.", EntradaContableId = 0, TipoMovimiento = "CR", Monto = 5000.00, Estado = true },
-                    new DetalleEntradaContable { Id = 0, CuentaContableId = 0, Descripcion = "Breve descripción del detalle 2.", EntradaContableId = 0, TipoMovimiento = "DB", Monto = 5000.00, Estado = true }
+                    new { CuentaContableId = 0, Descripcion = "Breve descripción del detalle 1.", TipoMovimiento = "CR", Monto = 5000.00 },
+                    new { CuentaContableId = 0, Descripcion = "Breve descripción del detalle 2.", TipoMovimiento = "DB", Monto = 5000.00 }
                 }
             };
 

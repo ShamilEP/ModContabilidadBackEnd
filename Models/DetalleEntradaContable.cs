@@ -6,6 +6,11 @@ namespace ModContabilidad.Models
 {
     public partial class DetalleEntradaContable
     {
+        public DetalleEntradaContable()
+        {
+            Estado = true;
+        }
+
         public int Id { get; set; }
         public int EntradaContableId { get; set; }
 
@@ -18,7 +23,7 @@ namespace ModContabilidad.Models
         public string TipoMovimiento { get; set; }
         //descripcion de detalle agregada by ignacio
         [Required]
-        [StringLength(130, ErrorMessage = "Descripcion invalida.", MinimumLength = 1)]
+        [StringLength(130, ErrorMessage = "Descripción inválida.", MinimumLength = 1)]
         public string Descripcion { get; set; }
 
         [Required]
